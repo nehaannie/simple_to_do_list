@@ -18,20 +18,16 @@ A simple and interactive To-Do List application built with HTML, CSS, and JavaSc
 ## Preview
 
 Main Screen 
-
 ![Main Page 1](to1.png)
 
 Adding a task finish homework
-
 ![Main Page 2](to2.png)
 
 Finish homework is added to list of tasks
-
 ![Main Page 3](to3.png)
 
 The task can be marked as done by clicking on the task
-
-![Main Page 4](t04.png)
+![Main Page 4](to4.png)
 
 ## Code Structure
 HTML: Defines the structure of the To-Do List, including the input field, add button, and list items.
