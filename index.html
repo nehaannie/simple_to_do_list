@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>To-Do List</title>
+  <style>
+    /* Global Styles */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Header Styles */
+    .header {
+      background-color: pink;
+      padding: 30px 40px;
+      color: white;
+      text-align: center;
+ 
+    }
+
+    /* Input and Button Styles */
+    input {
+      width: 80%;
+      padding: 10px;
+      font-size: 20px;
+      border: none;
+      border-radius: 4px 0 0 4px;
+      box-sizing: border-box;
+    }
+
+    .addBtn {
+      width: 20%;
+      padding: 10px;
+      background: #d9d9d9;
+      color: #555;
+      text-align: center;
+      font-size: 20px;
+      cursor: pointer;
+      border: none;
+      border-radius: 0 4px 4px 0;
+      box-sizing: border-box;
+    }
+
+    .addBtn:hover {
+      background-color: #bbb;
+    }
+
+    /* List Styles */
+    ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    ul li {
+      position: relative;
+      padding: 15px;
+      background: #eee;
+      font-size: 20px;
+      cursor: pointer;
+      user-select: none;
+      border-bottom: 1px solid #ddd;
+    }
+
+    ul li:hover {
+      background:pink;
+    }
+
+    ul li.checked {
+      background: rgba(99, 96, 96, 0.734);
+      color: #fff;
+      text-decoration: line-through;
+    }
+
+    ul li.checked::before {
+      content: '';
+      position: absolute;
+      border-color: #fff;
+      border-style: solid;
+      border-width: 0 2px 2px 0;
+      top: 15px;
+      left: 15px;
+      transform: rotate(45deg);
+      height: 15px;
+      width: 7px;
+    }
+
+    .close {
+      position: absolute;
+      right: 0;
+      top: 0;
+      padding: 12px;
+      cursor: pointer;
+    }
+
+    .close:hover {
+      background-color: #cf8bdd;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>My To Do List</h1>
+    <input type="text" id="myInput" placeholder="Title...">
+    <span onclick="newElement()" class="addBtn">Add</span>
+  </div>
+
+  <ul id="myUL">
+    <li>Wash clothes</li>
+    <li class="checked">Pay bills</li>
+    <li>Read book</li>
+    <li>Buy grocery</li>
+    <li class="checked">Complete assignment</li>
+  </ul>
+
+  <script>
+    // Function to create and append close buttons
+    function createCloseButtons() {
+      var myNodelist = document.getElementsByTagName("LI");
+      for (var i = 0; i < myNodelist.length; i++) {
+        var span = document.createElement("SPAN");
+        var txt = document.createTextNode("\u00D7");
+        span.className = "close";
+        span.appendChild(txt);
+        myNodelist[i].appendChild(span);
+      }
+    }
+
+    // Initialize close buttons
+    createCloseButtons();
+
+    // Add click event to close buttons
+    document.addEventListener('click', function(event) {
+      if (event.target.className === 'close') {
+        var div = event.target.parentElement;
+        div.style.display = "none";
+      }
+    });
+
+    // Add click event to list items
+    document.querySelector('ul').addEventListener('click', function(event) {
+      if (event.target.tagName === 'LI') {
+        event.target.classList.toggle('checked');
+      }
+    });
+
+    // Create a new list item
+    function newElement() {
+      var li = document.createElement("li");
+      var inputValue = document.getElementById("myInput").value;
+      if (inputValue.trim() === '') {
+        alert("Write something!");
+        return;
+      }
+      var t = document.createTextNode(inputValue);
+      li.appendChild(t);
+      document.getElementById("myUL").appendChild(li);
+      document.getElementById("myInput").value = "";
+
+      var span = document.createElement("SPAN");
+      var txt = document.createTextNode("\u00D7");
+      span.className = "close";
+      span.appendChild(txt);
+      li.appendChild(span);
+
+      createCloseButtons(); // Ensure the new close button has functionality
+    }
+  </script>
+</body>
+</html>
